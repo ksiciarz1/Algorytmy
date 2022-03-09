@@ -53,15 +53,15 @@ namespace lab_1
             if (array.Length > 0)
             {
                 avg = sum / array.Length;
-            }
 
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (!(array[i] / Math.Pow(10, k) > 1 || array[i] / Math.Pow(10, k - 1) < 1)) // if 2 digit
+                for (int i = 0; i < array.Length; i++)
                 {
-                    if (array[i] < sum)
+                    if (!(array[i] / Math.Pow(10, k) > 1 || array[i] / Math.Pow(10, k - 1) < 1)) // if 2 digit
                     {
-                        endSum += array[i];
+                        if (array[i] < avg)
+                        {
+                            endSum += array[i];
+                        }
                     }
                 }
             }
