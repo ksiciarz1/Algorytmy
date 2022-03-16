@@ -7,12 +7,12 @@ namespace lab_3
     {
         static void Main(string[] args)
         {
-            //for (int i = 2; i < 20; i++)
-            //{
-            //    Console.WriteLine($"Petla: {i}");
-            //    Console.WriteLine(fib(i));
-            //    Console.WriteLine(fibZMemorzacja(i));
-            //}
+            for (int i = 2; i < 20; i++)
+            {
+                Console.WriteLine($"Petla: {i}");
+                Console.WriteLine(fib(i));
+                Console.WriteLine(fibZMemorzacja(i));
+            }
 
             Item[] items = new Item[15];
             for (int i = 0; i < items.Length; i++)
@@ -20,6 +20,13 @@ namespace lab_3
                 items[i] = new Item();
             }
             Kufer(items, 15);
+
+            int[] reszta = CasheRegiser.Payment(new int[] { 0, 0, 2 }, 4);
+
+            for (int i = 0; i < reszta.Length; i++)
+            {
+                Console.WriteLine($"i: {i} {reszta[i]}");
+            }
         }
 
         static long fib(int n)
@@ -130,6 +137,39 @@ namespace lab_3
         {
             this.itemId = itemId;
             this.wazonaWartosc = wazonaWartosc;
+        }
+    }
+
+    // zdanie 3
+    public class CasheRegiser
+    {
+        static public int[] Payment(int[] income, int amount)
+        {
+            int[] reszta = new int[3];
+            int suma=0;
+            suma += income[0];
+            suma += income[1] * 2;
+            suma += income[2] * 5;
+
+            int doWydania = suma - amount;
+
+            while (doWydania >= 5)
+            {
+                doWydania -= 5;
+                reszta[2]++;
+            }
+            while (doWydania >= 2)
+            {
+                doWydania -= 2;
+                reszta[1]++;
+            }
+            if (doWydania == 1)
+            {
+                doWydania--;
+                reszta[0]++;
+            }
+            Console.WriteLine(doWydania);
+            return reszta;
         }
     }
 }
