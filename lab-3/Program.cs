@@ -14,7 +14,7 @@ namespace lab_3
             //    Console.WriteLine(fibZMemorzacja(i));
             //}
 
-            Item[] items = new Item[20];
+            Item[] items = new Item[15];
             for (int i = 0; i < items.Length; i++)
             {
                 items[i] = new Item();
@@ -53,7 +53,7 @@ namespace lab_3
         // zadanie 2
         static int Kufer(Item[] items, int iloscPrzegrudek)
         {
-            itemsStruck[] itemStuckArray = new itemsStruck[items.Length];
+            ItemStruck[] itemStuckArray = new ItemStruck[items.Length];
             int pozostalePrzegrodki = iloscPrzegrudek;
             int suma = 0;
             List<Item> itemsInside = new List<Item>();
@@ -61,7 +61,7 @@ namespace lab_3
             // tworzenie tablicy z odwolaniami do przedmiotow
             for (int i = 0; i < items.Length; i++)
             {
-                itemStuckArray[i] = new itemsStruck(i, items[i].wartosc / items[i].iloscPrzegrodek);
+                itemStuckArray[i] = new ItemStruck(i, items[i].wartosc / items[i].iloscPrzegrodek);
             }
 
             // sortowanie malejąco względem wartości/ilość zajmowanych przegródek
@@ -71,7 +71,7 @@ namespace lab_3
                 {
                     if (itemStuckArray[j].wazonaWartosc < itemStuckArray[j + 1].wazonaWartosc)
                     {
-                        itemsStruck temp = itemStuckArray[j];
+                        ItemStruck temp = itemStuckArray[j];
                         itemStuckArray[j] = itemStuckArray[j + 1];
                         itemStuckArray[j + 1] = temp;
                     }
@@ -107,20 +107,26 @@ namespace lab_3
         public Item()
         {
             Random random = new Random();
-            wartosc = random.Next(0, 10);
-            iloscPrzegrodek = random.Next(1, 4);
+            wartosc = random.Next(1, 11);
+            iloscPrzegrodek = random.Next(1, 5);
+
             if (iloscPrzegrodek == 3)
             {
                 iloscPrzegrodek = 2;
             }
         }
+        public Item(int wartosc, int iloscPrzegrodek)
+        {
+            this.wartosc = wartosc;
+            this.iloscPrzegrodek = iloscPrzegrodek;
+        }
     }
-    public struct itemsStruck
+    public struct ItemStruck
     {
         public int itemId;
         public int wazonaWartosc;
 
-        public itemsStruck(int itemId, int wazonaWartosc)
+        public ItemStruck(int itemId, int wazonaWartosc)
         {
             this.itemId = itemId;
             this.wazonaWartosc = wazonaWartosc;
