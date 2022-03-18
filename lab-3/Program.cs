@@ -31,6 +31,10 @@ namespace lab_3
 
         static long fib(int n)
         {
+            if (n < 1)
+            {
+                throw new ArgumentException("Liczba musi być większa lub równa 1", nameof(n));
+            }
             if (n < 2)
             {
                 return 1;
@@ -41,6 +45,10 @@ namespace lab_3
         // zadanie 1
         static long fibZMemorzacja(int n)
         {
+            if (n < 1)
+            {
+                throw new ArgumentException("Liczba musi być większa lub równa 1", nameof(n));
+            }
             if (n < 2)
             {
                 return 1;
@@ -60,6 +68,10 @@ namespace lab_3
         // zadanie 2
         static int Kufer(Item[] items, int iloscPrzegrudek)
         {
+            if (items.Length < 0)
+            {
+                throw new ArgumentException("Tablica nie może być pusta", nameof(Item));
+            }
             ItemStruck[] itemStuckArray = new ItemStruck[items.Length];
             int pozostalePrzegrodki = iloscPrzegrudek;
             int suma = 0;
@@ -146,7 +158,7 @@ namespace lab_3
         static public int[] Payment(int[] income, int amount)
         {
             int[] reszta = new int[3];
-            int suma=0;
+            int suma = 0;
             suma += income[0];
             suma += income[1] * 2;
             suma += income[2] * 5;

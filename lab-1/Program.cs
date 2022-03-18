@@ -71,9 +71,12 @@ namespace lab_1
         // zadanie 3
         public static int FindInSortedTable(int[] array, int k)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException("Nie możesz podać pustej tablicy", nameof(array));
+            }
             int temp = 0;
             int[] sortedArray = array;
-            k++;
             for (int i = 0; i < sortedArray.Length; i++) // sorting sortedArray
             {
                 for (int j = 0; j < sortedArray.Length - 1; j++)
@@ -88,9 +91,9 @@ namespace lab_1
             }
             sortedArray = sortedArray.Distinct().ToArray();
 
-            if (k > 0 && k <= sortedArray.Length)
+            if ((k + 1) > 0 && (k + 1) <= sortedArray.Length)
             {
-                return sortedArray[k - 1];
+                return sortedArray[k];
             }
             return -1;
         }

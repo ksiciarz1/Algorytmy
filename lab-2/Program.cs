@@ -32,7 +32,7 @@ namespace Lab2
         {
             if (n < 0)
             {
-                throw new ArgumentException("Wartość nie może być mniejsza od zera");
+                throw new ArgumentException("Wartość nie może być mniejsza od zera", nameof(n));
             }
             if (n == 0)
             {
@@ -60,6 +60,10 @@ namespace Lab2
         // zadanie 2
         static int IloscPowtorzenWTablicy(int[] tablica, int wyjatkowe, int iloscWyjatkowych = 0, int i = 0)
         {
+            if (i > 0)
+            {
+                throw new ArgumentException("Wartość nie może być mniejsza od zeroa", nameof(i));
+            }
             if (i == tablica.Length - 1)
             {
                 if (tablica[i] == wyjatkowe)
