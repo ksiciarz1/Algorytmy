@@ -180,56 +180,5 @@ namespace lab_4
             }
             return posorotowanaTablica;
         }
-        static public string[] SortowaniePrzezWybieranie(string[] tablicaDoSortowania, bool rosnoca = true)
-        {
-            if (tablicaDoSortowania.Length <= 1)
-            {
-                throw new ArgumentException("tablica musi być większa niż 1", nameof(tablicaDoSortowania));
-            }
-
-            string[] posorotowanaTablica = tablicaDoSortowania;
-
-            for (int i = 0; i < tablicaDoSortowania.Length; i++)
-            {
-                string minimum = " ";
-                int indexOfMinimum = -1;
-                for (int j = i; j < tablicaDoSortowania.Length; j++)
-                {
-                    if (rosnoca)
-                    {
-                        if (minimum == " ")
-                        {
-                            minimum = posorotowanaTablica[j];
-                            indexOfMinimum = j;
-                        }
-                        else if (minimum.CompareTo(posorotowanaTablica[j]) > 0)
-                        {
-                            minimum = posorotowanaTablica[j];
-                            indexOfMinimum = j;
-                        }
-                    }
-                    else
-                    {
-                        if (minimum == " ")
-                        {
-                            minimum = posorotowanaTablica[j];
-                            indexOfMinimum = j;
-                        }
-                        else if (minimum.CompareTo(posorotowanaTablica[j]) < 0)
-                        {
-                            minimum = posorotowanaTablica[j];
-                            indexOfMinimum = j;
-                        }
-                    }
-                }
-                if (indexOfMinimum != -1)
-                {
-                    string temp = posorotowanaTablica[i];
-                    posorotowanaTablica[i] = minimum;
-                    posorotowanaTablica[indexOfMinimum] = temp;
-                }
-            }
-            return posorotowanaTablica;
-        }
     }
 }
