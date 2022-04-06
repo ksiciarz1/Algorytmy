@@ -18,8 +18,25 @@ namespace lab_6
             if (queue.Count() == 2)
                 Console.WriteLine("3");
 
+            Console.WriteLine("///////////////\n");
+
             // Priority Queue
             PriorityQueue priorityQueue = new PriorityQueue(5);
+
+            priorityQueue.Add(5);
+            priorityQueue.Add(2);
+            priorityQueue.Add(3);
+            priorityQueue.Add(8);
+            priorityQueue.Add(4);
+
+            if (priorityQueue.Remove() == 8)
+                Console.WriteLine("1");
+            if (priorityQueue.Remove() == 5)
+                Console.WriteLine("2");
+            if (priorityQueue.Remove() == 4)
+                Console.WriteLine("3");
+
+            Console.WriteLine("///////////////\n");
 
         }
     }
@@ -84,7 +101,7 @@ namespace lab_6
             array = new int[size];
         }
 
-        public bool Insert(int value)
+        public bool Add(int value)
         {
             if (!IsFull())
             {
@@ -96,7 +113,15 @@ namespace lab_6
         }
         public int Remove()
         {
-            return 0;
+            if (!IsEmpty())
+            {
+                int removed = array[0];
+                array[0] = array[last--];
+                RebuildDown();
+
+                return removed;
+            }
+            throw new Exception();
         }
         public int Count()
         {
@@ -111,11 +136,11 @@ namespace lab_6
             return Count() == array.Length;
         }
 
-        private int leftChild(int parent)
+        private int LeftChild(int parent)
         {
             return parent * 2 + 1;
         }
-        private int rightChild(int parent)
+        private int RightChild(int parent)
         {
             return parent * 2 + 2;
         }
@@ -142,6 +167,31 @@ namespace lab_6
                 }
                 else
                     break;
+            }
+        }
+        private void RebuildDown()
+        {
+            int node = 0;
+
+            while (node <= last)
+            {
+                int leftChildValue = array[LeftChild(node)];
+                int rightChildValue = array[RightChild(node)];
+                int nodeValue = array[node];
+
+                if (nodeValue >= leftChildValue && nodeValue >= rightChildValue)
+                    break;
+
+                if (leftChildValue > rightChildValue)
+                {
+                    (array[node], array[LeftChild(node)]) = (array[LeftChild(node)], array[node]); // swaping
+                    node = LeftChild(node);
+                }
+                else
+                {
+                    (array[node], array[RightChild(node)]) = (array[RightChild(node)], array[node]); // swaping
+                    node = RightChild(node);
+                }
             }
         }
     }
