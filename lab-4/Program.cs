@@ -180,6 +180,7 @@ namespace lab_4
             }
             return posorotowanaTablica;
         }
+<<<<<<< HEAD
         static public string[] SortowaniePrzezWybieranie(string[] tablicaDoSortowania, bool rosnoca = true)
         {
             if (tablicaDoSortowania.Length <= 1)
@@ -231,5 +232,7 @@ namespace lab_4
             }
             return posorotowanaTablica;
         }
+=======
+>>>>>>> master
     }
 }
