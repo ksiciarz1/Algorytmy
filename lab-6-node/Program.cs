@@ -115,5 +115,55 @@ namespace lab_6_node
                 }
             }
         }
+
+        public class PriorityQueue<T>
+        {
+            private int count = 0;
+
+            public int Count { get => count; }
+            public PriorityQueue() { }
+
+            //public bool Add(T value)
+            //{
+            //    count++;
+            //    return false;
+            //}
+            //public T Remove()
+            //{
+            //    count--;
+
+            //}
+            //public bool IsEmpty()
+            //{
+            //    return count == 0;
+            //}
+            //public void RoundUp(Node<T> node) 
+            //{
+
+            //}
+            //public void RoundDown()
+            //{
+
+            //}
+
+            internal class Node<Y>
+            {
+                private Y value;
+                private Node<Y>? parent;
+                private Node<Y>? leftChild;
+                private Node<Y>? rightChild;
+
+                public Y Value { get => value; set => this.value = value; }
+                public Node<Y> Parent { get => parent; set => this.parent = value; }
+                public Node<Y> LeftChild { get => leftChild; set => this.leftChild = value; }
+                public Node<Y> RightChild { get => rightChild; set => this.rightChild = value; }
+
+                public Node(Y value, Node<Y> parent = null)
+                {
+                    this.value = value;
+                    this.parent = parent;
+                }
+            }
+        }
     }
 }
