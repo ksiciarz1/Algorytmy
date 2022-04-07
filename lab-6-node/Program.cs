@@ -60,7 +60,7 @@ namespace lab_6_node
                 if (value == null)
                     throw new ArgumentNullException("value");
 
-                if (!isEmpty())
+                if (!IsEmpty())
                 {
                     count++;
                     Node<T> temp = new Node<T>(value);
@@ -83,7 +83,7 @@ namespace lab_6_node
             /// <returns>First element in Queue</returns>            
             public T Remove()
             {
-                if (isEmpty())
+                if (IsEmpty())
                     throw new Exception("Queue is empty");
 
                 T removed = firstNode.Value;
@@ -95,7 +95,7 @@ namespace lab_6_node
                 return removed;
             }
 
-            public bool isEmpty()
+            public bool IsEmpty()
             {
                 return count == 0;
             }
@@ -116,35 +116,90 @@ namespace lab_6_node
             }
         }
 
-        public class PriorityQueue<T>
+        public class PriorityQueue<T> where T : IComparable<T>, IEquatable<T>
         {
             private int count = 0;
+            private Node<T> firstNode = null;
+            private Node<T> lastNode = null;
 
             public int Count { get => count; }
             public PriorityQueue() { }
 
+            //// Will not work
             //public bool Add(T value)
             //{
-            //    count++;
-            //    return false;
+            //    if (value == null)
+            //        throw new ArgumentNullException("value");
+
+            //    if (!IsEmpty())
+            //    {
+            //        count++;
+            //        Node<T> temp = new Node<T>(value);
+            //        if (lastNode.Parent == null)
+            //        {
+            //            firstNode.LeftChild = temp;
+            //            temp.IsLeftChild = true;
+            //            temp.Parent = lastNode.Parent;
+            //            lastNode = temp;
+            //            RoundUp(temp);
+            //            return true;
+            //        }
+            //        else if (lastNode.IsLeftChild || lastNode.Parent.RightChild == null)
+            //        {
+            //            lastNode.Parent.RightChild = temp;
+            //            temp.IsLeftChild = false;
+            //            temp.Parent = lastNode.Parent;
+            //            lastNode = temp;
+            //            RoundUp(temp);
+            //            return true;
+            //        }
+            //        else if (!lastNode.IsLeftChild)
+            //        {
+            //            lastNode.LeftChild = temp;
+            //            temp.IsLeftChild = true;
+            //            lastNode = temp;
+            //            RoundUp(temp);
+            //            return true;
+            //        }
+
+            //        lastNode.NextNode = temp;
+            //        lastNode = temp;
+            //        return true;
+            //    }
+            //    else
+            //    {
+            //        count++;
+            //        Node<T> temp = new Node<T>(value);
+            //        firstNode = temp;
+            //        lastNode = temp;
+            //        return true;
+            //    }
             //}
             //public T Remove()
             //{
+            //    if (IsEmpty())
+            //        throw new Exception("Queue is empty");
+
+            //    T removed = firstNode.Value;
             //    count--;
+            //    if (firstNode.NextNode != null)
+            //        firstNode = firstNode.NextNode;
+            //    else
+            //        firstNode = null;
+            //    return removed;
+            //}
+            public bool IsEmpty()
+            {
+                return count == 0;
+            }
+            public void RoundUp(Node<T> node)
+            {
 
-            //}
-            //public bool IsEmpty()
-            //{
-            //    return count == 0;
-            //}
-            //public void RoundUp(Node<T> node) 
-            //{
+            }
+            public void RoundDown()
+            {
 
-            //}
-            //public void RoundDown()
-            //{
-
-            //}
+            }
 
             internal class Node<Y>
             {
@@ -152,11 +207,13 @@ namespace lab_6_node
                 private Node<Y>? parent;
                 private Node<Y>? leftChild;
                 private Node<Y>? rightChild;
+                private bool isLeftChild;
 
                 public Y Value { get => value; set => this.value = value; }
                 public Node<Y> Parent { get => parent; set => this.parent = value; }
                 public Node<Y> LeftChild { get => leftChild; set => this.leftChild = value; }
                 public Node<Y> RightChild { get => rightChild; set => this.rightChild = value; }
+                public bool IsLeftChild { get => isLeftChild; set => this.isLeftChild = value; }
 
                 public Node(Y value, Node<Y> parent = null)
                 {
