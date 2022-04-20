@@ -64,8 +64,8 @@ namespace lab_8
                 array[i] = random.Next(100);
             }
 
-            Array.Sort(array);
             stopwatch.Start();
+            Array.Sort(array);
             Array.BinarySearch(array, random.Next(100));
             Array.BinarySearch(array, random.Next(100));
             Array.BinarySearch(array, random.Next(100));
@@ -85,13 +85,13 @@ namespace lab_8
                 array[i] = random.Next(1000);
             }
 
-            Array.Sort(array);
             stopwatch.Start();
+            Array.Sort(array);
             Array.BinarySearch(array, random.Next(1000));
             Array.BinarySearch(array, random.Next(1000));
             Array.BinarySearch(array, random.Next(1000));
             stopwatch.Stop();
-            Console.WriteLine($"For 1000 Binear: {stopwatch.Elapsed.TotalMilliseconds}ms");
+            Console.WriteLine($"For 1000 Binary: {stopwatch.Elapsed.TotalMilliseconds}ms");
             stopwatch.Reset();
             stopwatch.Start();
             Array.Find<int>(array, value => { return value == random.Next(1000); });
@@ -106,13 +106,13 @@ namespace lab_8
                 array[i] = random.Next(10000);
             }
 
-            Array.Sort(array);
             stopwatch.Start();
+            Array.Sort(array);
             Array.BinarySearch(array, random.Next(10000));
             Array.BinarySearch(array, random.Next(10000));
             Array.BinarySearch(array, random.Next(10000));
             stopwatch.Stop();
-            Console.WriteLine($"For 10000 Binear: {stopwatch.Elapsed.TotalMilliseconds}ms");
+            Console.WriteLine($"For 10000 Binary: {stopwatch.Elapsed.TotalMilliseconds}ms");
             stopwatch.Reset();
             stopwatch.Start();
             Array.Find<int>(array, value => { return value == random.Next(10000); });
@@ -127,20 +127,20 @@ namespace lab_8
                 array[i] = random.Next(10000);
             }
 
-            Array.Sort(array);
             stopwatch.Start();
+            Array.Sort(array);
             Array.BinarySearch(array, random.Next(10000));
             Array.BinarySearch(array, random.Next(10000));
             Array.BinarySearch(array, random.Next(10000));
             stopwatch.Stop();
-            Console.WriteLine($"For 10000 Binear: {stopwatch.Elapsed.TotalMilliseconds}ms");
+            Console.WriteLine($"For 10000 Binary: {stopwatch.Elapsed.TotalMilliseconds}ms");
             stopwatch.Reset();
             stopwatch.Start();
             Array.Find<int>(array, value => { return value == random.Next(100000); });
             Array.Find<int>(array, value => { return value == random.Next(100000); });
             Array.Find<int>(array, value => { return value == random.Next(100000); });
             stopwatch.Stop();
-            Console.WriteLine($"For 100000 Linear: {stopwatch.Elapsed.TotalMilliseconds}ms");
+            Console.WriteLine($"For 10000 Linear: {stopwatch.Elapsed.TotalMilliseconds}ms");
             stopwatch.Reset();
 
         }
