@@ -47,7 +47,7 @@ namespace lab_7
 
         static bool TestOnMyList<T>(MyLinkedList<T> list) where T : IComparable
         {
-            return list.Get(list.Count) == list.Get(0);
+            return list.GetNode(list.Count) == list.GetNode(0);
         }
     }
 
@@ -205,6 +205,27 @@ namespace lab_7
                     temp = temp.Next;
                 }
                 return temp.Value;
+            }
+            else
+            {
+                throw new NullReferenceException("Stack is empty");
+            }
+        }
+        public Node<T> GetNode(int index)
+        {
+            if (head != null)
+            {
+                if (index == 0)
+                {
+                    return head;
+                }
+
+                Node<T> temp = head;
+                for (int i = 1; i < Count; i++)
+                {
+                    temp = temp.Next;
+                }
+                return temp;
             }
             else
             {
