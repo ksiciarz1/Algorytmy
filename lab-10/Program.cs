@@ -16,6 +16,8 @@ namespace lab_10
             tree.PostorderTraversal(node => { Console.Write($"{node.Value}, "); }); // 8, 9, 3, 10, 6, 1,
             Console.WriteLine("\n");
             tree.LevelTraversal(node => { Console.Write($"{node.Value}, "); }); //1, 3, 6, 8, 9, 10,
+            Console.WriteLine("\n");
+            tree.GetPathTraversal(); //
 
         }
     }
@@ -121,6 +123,30 @@ namespace lab_10
                 if (tempNode.Right != null)
                     nodeQueue.Enqueue(tempNode.Right);
             }
+        }
+
+        public List<T[]> GetPathTraversal()
+        {
+            List<T[]> returnList = new();
+            GetPathTraversalRecursive(Root, new Stack<T>(), returnList);
+            return returnList;
+
+        }
+
+        private void GetPathTraversalRecursive(Node<T> node, Stack<T> stack, List<T[]> paths)
+        {
+            if (node != null)
+            {
+                stack.Push(node.Value);
+                if (node.Left == null && node.Right == null)
+                {
+                    paths.Add(stack.ToArray());
+                    stack.Pop();
+                    return;
+                }
+            }
+            GetPathTraversalRecursive(node.Left, stack, paths);
+            GetPathTraversalRecursive(node.Right, stack, paths);
         }
 
         private static int Left(int index) { return 2 * index + 1; }
