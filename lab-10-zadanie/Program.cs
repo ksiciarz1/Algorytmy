@@ -126,10 +126,18 @@ namespace lab_10_task
         //Zaimplementuj metodę przechodzenia po drzewie metodą pre-order
         public void PreorderTraversal(Action<Node<T>> action)
         {
-            Node<T> tempNode = Root;
-            while(tempNode!= null)
+            PreorderTraversalRecursive(Root, action);
+        }
+
+        private void PreorderTraversalRecursive(Node<T> node, Action<Node<T>> action)
+        {
+            if (node != null)
             {
-                action.Invoke(tempNode);
+                action.Invoke(node);
+                if (node.Children != null)
+                    if (node.Children.Count > 0)
+                        foreach (var child in node.Children)
+                            PreorderTraversalRecursive(child, action);
             }
         }
 
@@ -137,7 +145,20 @@ namespace lab_10_task
         //Zaimplementuj metodę prechodzenia po drzewie metodą post-order
         public void PostorderTraversal(Action<Node<T>> action)
         {
-            throw new NotImplementedException();
+            PostorderTraversalRecursive(Root, action);
+        }
+
+        private void PostorderTraversalRecursive(Node<T> node, Action<Node<T>> action)
+        {
+            if (node != null)
+            {
+                if (node.Children != null)
+                    if (node.Children.Count > 0)
+                        foreach (var child in node.Children)
+                            PreorderTraversalRecursive(child, action);
+
+                action.Invoke(node);
+            }
         }
 
         public List<T[]> GetPaths()
@@ -190,7 +211,15 @@ namespace lab_10_task
         //Wykorzystaj jedną z metod przeglądania drzewa z klasy Tree
         public int GetSize()
         {
-            throw new NotImplementedException();
+            int size = 0;
+            PreorderTraversal(node =>
+            {
+                if (node.Value.Size != 0)
+                {
+                    size += node.Value.Size;
+                }
+            });
+            return size;
         }
 
 
@@ -201,7 +230,38 @@ namespace lab_10_task
         // Pamiętaj, że GetPath zwraca elementy ściezki w odwróconej kolejności!
         public List<string> GetAbsolutePaths()
         {
-            throw new NotImplementedException();
+            List<string> paths = new List<string>();
+            GetPathTraversalRecursive(Root, new Stack<string>(), paths);
+            return paths;
+        }
+        private void GetPathTraversalRecursive(Node<File> node, Stack<string> pathStack, List<string> paths)
+        {
+            if (node != null)
+            {
+                pathStack.Push(node.Value.Name);
+                if (node.Children == null)
+                {
+                    string[] pathsArray = pathStack.ToArray();
+                    string path = "";
+                    for (int i = pathsArray.Length - 1; i >= 0; i--)
+                    {
+                        if (i == 0)
+                            path += pathsArray[i];
+
+                        else
+                            path += $"{pathsArray[i]}:";
+                    }
+
+                    paths.Add(path);
+                    pathStack.Pop();
+                    return;
+                }
+            }
+            foreach (var child in node.Children)
+            {
+                GetPathTraversalRecursive(child, pathStack, paths);
+            }
+            pathStack.Pop();
         }
     }
 }
