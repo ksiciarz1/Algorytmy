@@ -16,7 +16,11 @@ namespace lab_13
 
             if (Zadanie3("abc", "cba") && !Zadanie3("abc", "caba") && Zadanie3("aabbcc", "abcabc") && Zadanie3("a", "a") && Zadanie3("", "") && !Zadanie3("aaaa", "aaac"))
                 punkty++;
-            if (Zadanie4("100000", "111111").Equals("1211111"))
+
+            if (Zadanie4("100000", "911111").Equals("1011111"))
+                punkty++;
+
+            if (Zadanie5("abcdabcd", 4).Equals("abcd\nabcd"))
                 punkty++;
 
             Console.WriteLine(punkty);
@@ -112,21 +116,50 @@ namespace lab_13
         // Dodawanie dwóch liczb całkowitych zapisanych w łańcuchu
         public static string Zadanie4(string input1, string input2)
         {
+            string returnString = "";
             // Dodawnie w słupku
+            input1.PadLeft(input2.Length, '0');
+            input2.PadLeft(input1.Length, '0');
+
+            for (int i = 0; i < input1.Length; i++)
+            {
+                int val1 = int.Parse(input1[i].ToString());
+                int val2 = int.Parse(input2[i].ToString());
+                if (val1 + val2 >= 10)
+                {
+                    if (returnString.Equals(""))
+                    {
+                        returnString += val1 + val2;
+                    }
+                    else
+                    {
+                        returnString =
+                            returnString.Substring(0, i - 1)
+                            + (returnString[i] + (int)(val1 + val2 / 10))
+                            + (val1 + val2 - 10);
+                    }
+                }
+                else
+                {
+                    returnString += val1 + val2;
+                }
+            }
+            return returnString;
         }
 
         // Formatowanie do łańcucha o długości nie większej niż n
         public static string Zadanie5(string input, int n)
         {
+            string returnString = "";
             // Ambitnie bez łamania słów
-            for (int i = 0; i < input.Length; i++)
+            for (int i = 1; i < input.Length; i++)
             {
-                if (i % n == 0 && i != 0)
+                if (i % n == 0)
                 {
-                    input = input.Substring(0, i) + "\n" + input.Substring(i + 1);
+                    returnString = input.Substring(0, i) + "\n" + input.Substring(i);
                 }
             }
-            return input;
+            return returnString;
         }
     }
 
